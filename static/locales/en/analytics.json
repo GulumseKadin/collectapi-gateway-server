@@ -1,0 +1,19 @@
+{
+	"analytics_usage": "Usage Analytics",
+	"total_request": "Total Request",
+	"total_cost": "Total Cost",
+	"used_api_count": "Used Api Count",
+	"used_endpoint_count": "Used Endpoint Count",
+	"all_usage": "All Usage",
+	"api": "Api",
+	"per_call": "Per Call",
+	"total": "Total",
+	"total_usage_graph": "Total Usage Graphic",
+	"api_graph": "Api Usage Graphic",
+	"endpoint_graph": "Endpoint Usage Graphic",
+	"endpoint": "Endpoint",
+	"all": "All",
+	"api_pie": "Api Usage Distribution",
+	"endpoint_pie": "Endpoint Usage Distribution",
+	"empty_result": "There is no result found for these date selections."
+}

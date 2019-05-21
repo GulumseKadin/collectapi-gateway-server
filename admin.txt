@@ -1,0 +1,12 @@
+{
+  "isActive": true,
+  "createdAt": "Thu Oct 25 2018 10:05:18 GMT+0300 (+03)",
+  "updatedAt": "Thu Oct 25 2018 10:05:18 GMT+0300 (+03)",
+  "keyId": "67J46A7yWl9XvrZGH6HaIT",
+  "keySecret": "6QpDPbVBz0qJLg5CbURZts",
+  "scopes": [
+    "admin"
+  ],
+  "consumerId": "ae01f478-62c9-42bf-98e1-0a6debf807a9",
+  "id": "67J46A7yWl9XvrZGH6HaIT"
+}

@@ -1,0 +1,619 @@
+http:
+  port: '${GW_PORT:-6789}'
+admin:
+  port: 8765
+  hostname: localhost
+apiEndpoints:
+  admin:
+    host: localhost
+    paths:
+      - /admin
+      - /admin/*
+    scopes:
+      - admin
+  burc:
+    host: localhost
+    paths: /burc/*
+  doviz:
+    host: localhost
+    paths:
+      - /economy/allCurrency
+      - /economy/goldPrice
+      - /economy/singleCurrency
+      - /economy/cripto
+      - /economy/hisseSenedi
+    scopes:
+      - basic
+      - test
+  namaz:
+    host: localhost
+    paths:
+      - /namaz/all
+      - /namaz/single
+    scopes:
+      - basic
+      - test
+  saglik:
+    host: localhost
+    paths:
+      - /saglik/nobetciEczane
+    scopes:
+      - basic
+      - test
+
+  dictionary:
+    host: localhost
+    paths:
+      - /dictionary/wordSearch
+    scopes:
+      - basic
+      - test
+  ip:
+    host: localhost
+    paths:
+      - /ip/ipToLocation
+    scopes:
+      - basic
+      - test
+  food:
+    host: localhost
+    paths:
+      - /food/calories
+      - /food/whenFoods
+    scopes:
+      - basic
+      - test
+  nudeai:
+    host: localhost
+    paths:
+      - /nudeai/nudeDetection
+    scopes:
+      - basic
+      - test
+  travel:
+    host: localhost
+    paths:
+      - /travel/planeTicket
+      - /travel/busTicket
+    scopes:
+      - basic
+      - test
+  news:
+    host: localhost
+    paths:
+      - /news/getNews
+      - /news/getNewsfromRSS
+    scopes:
+      - basic
+      - test
+  objectai:
+    host: localhost
+    paths:
+      - /objectai/objectDetection
+    scopes:
+      - basic
+      - test
+  sport:
+    host: localhost
+    paths:
+      - /sport/goalKings
+      - /sport/league
+      - /sport/results
+      - /sport/formulaStanding
+    scopes:
+      - basic
+      - test
+  gasPrice:
+    host: localhost
+    paths:
+      - /gasPrice/gasoline
+      - /gasPrice/diesel
+    scopes:
+      - basic
+      - test
+  chanceGames:
+    host: localhost
+    paths:
+      - /chanceGames/sayisalLoto
+      - /chanceGames/superLoto
+    scopes:
+      - basic
+      - test
+  credit:
+    host: localhost
+    paths:
+      - /credit/creditBid
+      - /credit/generalBankRate
+      - /credit/mevduat
+    scopes:
+      - basic
+      - test
+  book:
+    host: localhost
+    paths:
+      - /book/bestSeller
+      - /book/newBook
+      - /book/search
+    scopes:
+      - basic
+      - test
+  watching:
+    host: localhost
+    paths:
+      - /watching/moviesPlaying
+      - /watching/moviesComing
+      - /watching/seriesRating
+      - /watching/seriesToday
+      - /watching/imdb
+      - /watching/movieSuggest
+      - /watching/tiyatro
+    scopes:
+      - basic
+      - test
+  halfiyat:
+    host: localhost
+    paths:
+      - /halFiyatlari/single
+      - /halFiyatlari/all
+    scopes:
+      - basic
+      - test
+  api:
+    host: localhost
+    paths: '*'
+serviceEndpoints:
+  adminBackend:
+    url: 'http://localhost:8765'
+  template:
+    url: 'http://144.76.110.176:3003/api/service/user/collectapi/'
+  messageintegration:
+    url: '${API:-http://localhost:3003}'
+policies:
+  - cors
+  - expression
+  - key-auth
+  - log
+  - metrics
+  - rewrite
+  - proxy
+  - rate-limit
+  - terminate
+pipelines:
+  adminAPI:
+    apiEndpoints:
+      - admin
+    policies:
+      - key-auth: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/admin/?(.*)$
+            action:
+              rewrite: /$1
+      - proxy:
+          - action:
+              serviceEndpoint: adminBackend
+  burc:
+    apiEndpoints:
+      - burc
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/burc/yorum(.*$)
+            action:
+              rewrite: /5bb4795c84515f3ef8dcb0ad$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  doviz:
+    apiEndpoints:
+      - doviz
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/economy/allCurrency(.*$)
+            action:
+              rewrite: /5b8e77b36e02d93b4ffe4514$1
+          - condition:
+              name: regexpmatch
+              match: ^/economy/goldPrice(.*$)
+            action:
+              rewrite: /5b8e7d3b6e02d93b4ffe45bd$1
+          - condition:
+              name: regexpmatch
+              match: ^/economy/singleCurrency(.*$)
+            action:
+              rewrite: /5be58d3669960253963aca48$1
+          - condition:
+              name: regexpmatch
+              match: ^/economy/cripto(.*$)
+            action:
+              rewrite: /5c5c28df526afd68cad58d27$1
+          - condition:
+              name: regexpmatch
+              match: ^/economy/hisseSenedi(.*$)
+            action:
+              rewrite: /5c5c2ad6526afd68cad58d9a$1        
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  namaz:
+    apiEndpoints:
+      - namaz
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/namaz/all(.*$)
+            action:
+              rewrite: /5b8e77a16e02d93b4ffe4510$1
+          - condition:
+              name: regexpmatch
+              match: ^/namaz/single(.*$)
+            action:
+              rewrite: /5b8f860a6e02d93b4ffe52f9$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  saglik:
+    apiEndpoints:
+      - saglik
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/saglik/nobetciEczane(.*$)
+            action:
+              rewrite: /5bbfb7df82c99b1952693167$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  halfiyat:
+    apiEndpoints:
+      - halfiyat
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/halFiyatlari/all(.*$)
+            action:
+              rewrite: /5bd071f276334d1349d415f6/1$1
+          - condition:
+              name: regexpmatch
+              match: ^/halFiyatlari/single(.*$)
+            action:
+              rewrite: /5bd071f276334d1349d415f6$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  news:
+    apiEndpoints:
+      - news
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/news/getNews(.*$)
+            action:
+              rewrite: /5b8e7da06e02d93b4ffe45d2$1
+          - condition:
+              name: regexpmatch
+              match: ^/news/getNewsfromRSS(.*$)
+            action:
+              rewrite: /5b8e7da06e02d93b4ffe45d2$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  sport:
+    apiEndpoints:
+      - sport
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/sport/goalKings(.*$)
+            action:
+              rewrite: /5b8e7a736e02d93b4ffe456d$1
+          - condition:
+              name: regexpmatch
+              match: ^/sport/league(.*$)
+            action:
+              rewrite: /5b8e77be6e02d93b4ffe4517$1
+          - condition:
+              name: regexpmatch
+              match: ^/sport/results(.*$)
+            action:
+              rewrite: /5b8e77c76e02d93b4ffe4518$1
+          - condition:
+              name: regexpmatch
+              match: ^/sport/formulaStanding(.*$)
+            action:
+              rewrite: /5bbdd4cdc540b02e8ec6910b$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  dictionary:
+    apiEndpoints:
+      - dictionary
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/dictionary/wordSearch(.*$)
+            action:
+              rewrite: /5b8e7e7e6e02d93b4ffe45fc$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  food:
+    apiEndpoints:
+      - food
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/food/calories(.*$)
+            action:
+              rewrite: /5b8e7cde6e02d93b4ffe45ac$1
+          - condition:
+              name: regexpmatch
+              match: ^/food/whenFoods(.*$)
+            action:
+              rewrite: /5ba244e5718a1c2001bb9f8f$1
+
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  book:
+    apiEndpoints:
+      - book
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/book/bestSeller(.*$)
+            action:
+              rewrite: /5b8fd4e26e02d93b4ffe5b8c$1
+          - condition:
+              name: regexpmatch
+              match: ^/book/newBook(.*$)
+            action:
+              rewrite: /5b8fd62a6e02d93b4ffe5bed$1
+          - condition:
+              name: regexpmatch
+              match: ^/book/search(.*$)
+            action:
+              rewrite: /5ba24054718a1c2001bb9f3a$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  gasPrice:
+    apiEndpoints:
+      - gasPrice
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/gasPrice/gasoline(.*$)
+            action:
+              rewrite: /5b8e7de56e02d93b4ffe45de$1
+          - condition:
+              name: regexpmatch
+              match: ^/gasPrice/diesel(.*$)
+            action:
+              rewrite: /5b8e7e1c6e02d93b4ffe45e3$1
+
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  travel:
+    apiEndpoints:
+      - travel
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/travel/planeTicket(.*$)
+            action:
+              rewrite: /5b8fba416e02d93b4ffe57f7$1
+          - condition:
+              name: regexpmatch
+              match: ^/travel/busTicket(.*$)
+            action:
+              rewrite: /5b8fb8b66e02d93b4ffe57d7$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  chanceGames:
+    apiEndpoints:
+      - chanceGames
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/chanceGames/sayisalLoto(.*$)
+            action:
+              rewrite: /5b8fc35b6e02d93b4ffe58e0$1
+          - condition:
+              name: regexpmatch
+              match: ^/chanceGames/superLoto(.*$)
+            action:
+              rewrite: /5b8fc6e06e02d93b4ffe593b$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+
+  credit:
+    apiEndpoints:
+      - credit
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/credit/creditBid(.*$)
+            action:
+              rewrite: /5b8e7e3a6e02d93b4ffe45ee$1
+          - condition:
+              name: regexpmatch
+              match: ^/credit/generalBankRate(.*$)
+            action:
+              rewrite: /5b8e7dbe6e02d93b4ffe45da$1
+          - condition:
+              name: regexpmatch
+              match: ^/credit/mevduat(.*$)
+            action:
+              rewrite: /5ba8f07d0fcdc542cdfb1931$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  nudeai:
+    apiEndpoints:
+      - nudeai
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/nudeai/nudeDetection(.*$)
+            action:
+              rewrite: /5c33294b07f0b223441e4035$1
+
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  ip:
+    apiEndpoints:
+      - ip
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/ip/ipToLocation(.*$)
+            action:
+              rewrite: /5bbc6c3084515f3ef8dcf533$1
+
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  objectai:
+    apiEndpoints:
+      - objectai
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/objectai/objectDetection(.*$)
+            action:
+              rewrite: /5c33541707f0b223441e48de$1
+
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  watching:
+    apiEndpoints:
+      - watching
+    policies:
+      - key-auth: null
+      - metrics: null
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/watching/moviesPlaying(.*$)
+            action:
+              rewrite: /5b8e7b4e6e02d93b4ffe457e$1
+          - condition:
+              name: regexpmatch
+              match: ^/watching/moviesComing(.*$)
+            action:
+              rewrite: /5b8e7c5c6e02d93b4ffe45a3$1
+          - condition:
+              name: regexpmatch
+              match: ^/watching/seriesRating(.*$)
+            action:
+              rewrite: /5b8e7d5a6e02d93b4ffe45c4$1
+          - condition:
+              name: regexpmatch
+              match: ^/watching/seriesToday(.*$)
+            action:
+              rewrite: /5b8e7e6e6e02d93b4ffe45fb$1
+          - condition:
+              name: regexpmatch
+              match: ^/watching/imdb(.*$)
+            action:
+              rewrite: /5b8e7d7e6e02d93b4ffe45cd$1
+          - condition:
+              name: regexpmatch
+              match: ^/watching/movieSuggest(.*$)
+            action:
+              rewrite: /5ba8cce90fcdc542cdfb1774$1
+          - condition:
+              name: regexpmatch
+              match: ^/watching/tiyatro(.*$)
+            action:
+              rewrite: /5ba8e0f40fcdc542cdfb18a6$1
+      - proxy:
+          - action:
+              serviceEndpoint: template
+              prependPath: true
+  default:
+    apiEndpoints:
+      - api
+    policies:
+      - metrics: null
+      - key-auth: null
+      - proxy:
+          - action:
+              serviceEndpoint: messageintegration
+              changeOrigin: true

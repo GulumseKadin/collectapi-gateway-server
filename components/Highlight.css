@@ -1,0 +1,10 @@
+.dahi-highlight>pre {
+    margin: 0 !important;
+    border: 0 !important;
+    padding-top: 40px !important;
+}
+
+.dahi-highlight {
+    border-radius: inherit;
+    overflow: auto;
+}

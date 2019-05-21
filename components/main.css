@@ -1,0 +1,215 @@
+html,
+body {
+    background-color: #1b1c1d;
+}
+
+#__next {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #f6f7f7;
+    /*padding-bottom: 181px;*/
+}
+
+.navbar .header.item {
+    font-weight: normal !important;
+}
+
+.root-container {
+    flex: 1;
+    /*  padding-bottom: 68px; */
+    display: flex !important;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.root-container.fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+pre {
+    overflow: auto;
+}
+
+._nav:hover {
+    text-decoration: none;
+}
+
+.main-blue {
+    color: #b7ecf3;
+}
+
+.main-pink {
+    color: #f6bd87;
+}
+
+.button-main {
+    color: #1b1c1d;
+}
+
+.button-main:hover {
+    text-decoration: none;
+}
+
+.button-footer {
+    text-decoration-color: white;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.button-footer:active {
+    color: white !important;
+}
+
+.button-footer:hover {
+    color: white !important;
+}
+
+.contact {
+    flex: 1 1 auto;
+    -webkit-box-flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-message {
+    max-width: 640px;
+    text-align: center;
+}
+
+.map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 41px 0 68px 0;
+}
+
+.map-card {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+@media only screen and (max-width: 767px) {
+    .ui.container {
+        margin: 0 !important;
+    }
+    .row {
+        margin: 0 !important;
+    }
+    .ui.items:not(.unstackable)>.item {
+        margin: 0 !important;
+    }
+    .ui.items:not(.unstackable)>.item>.image,
+    .ui.items:not(.unstackable)>.item>.image>img {
+        max-height: 80px !important;
+    }
+}
+
+.item-name:hover {
+    text-decoration: none;
+}
+
+.item-name {
+    color: black;
+}
+
+.api_item img {
+    max-width: 80px;
+}
+
+/* Make clicks pass-through */
+
+#nprogress {
+    pointer-events: none;
+}
+
+#nprogress .bar {
+    background: #29d;
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+}
+
+/* Fancy blur effect */
+
+#nprogress .peg {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+    opacity: 1;
+    -webkit-transform: rotate(3deg) translate(0px, -4px);
+    -ms-transform: rotate(3deg) translate(0px, -4px);
+    transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+
+#nprogress .spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 11px;
+    right: 15px;
+}
+
+#nprogress .spinner-icon {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    border: solid 2px transparent;
+    border-top-color: #29d;
+    border-left-color: #29d;
+    border-radius: 50%;
+    -webkit-animation: nprogress-spinner 400ms linear infinite;
+    animation: nprogress-spinner 400ms linear infinite;
+}
+
+.nprogress-custom-parent {
+    overflow: hidden;
+    position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+    position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes nprogress-spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.code-blok {
+    padding: 2rem 0 0 2rem;
+}
+
+.code-blok pre {
+    overflow: auto;
+}

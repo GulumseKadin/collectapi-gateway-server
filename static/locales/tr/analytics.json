@@ -1,0 +1,20 @@
+{
+	"analytics_usage": "Kullanım Bilgileri",
+	"total_request": "Toplam Sorgu",
+	"total_cost": "Toplam Maliyet",
+	"used_api_count": "Kullanılan Api Sayısı",
+	"used_endpoint_count": "Kullanılan Endpoint Sayısı",
+	"all_usage": "Tüm Kullanım",
+	"api": "Api",
+	"per_call": "Sorgu Başına",
+	"total": "Toplam",
+	"total_usage_graph": "Toplam Sorgu Grafiği",
+	"api_graph": "Api Kullanım Grafiği",
+	"endpoint_graph": "Endpoint Kullanım Grafiği",
+	"endpoint": "Endpoint",
+	"all": "Tümü",
+	"api_pie": "Api Kullanım Dağılımı",
+	"endpoint_pie": "Endpoint Kullanım Dağılımı",
+	"empty_result": "Bu aralıkta herhangi bir sonuç bulunamadı."
+
+}
